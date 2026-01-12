@@ -9,3 +9,7 @@
 5. npm run dev
 
 6. npm run build
+
+7. git branch -M main
+
+8. git status
