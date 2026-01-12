@@ -16,3 +16,5 @@
 
 $ git config user.name "daeyulfromKr"
 $ git config user.email "daeyul.lee@gmail.com"
+
+git remote set-url origin https://github.com/daeyulfromKr/supa-next-vercel.git
