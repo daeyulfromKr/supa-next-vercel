@@ -13,3 +13,6 @@
 7. git branch -M main
 
 8. git status
+
+$ git config user.name "daeyulfromKr"
+$ git config user.email "daeyul.lee@gmail.com"
