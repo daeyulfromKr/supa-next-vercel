@@ -10,7 +10,7 @@ export default function Layout({
         <aside className="w-60 h-screen text-slate-800">
             <div className="bg-blue-800 px-10 p-4 h-30 text-3xl flex items-end text-white rounded">
                 <h1>
-                    DKB Scuba
+                    <Link href="/">DKB Scuba</Link>
                 </h1>
             </div>
             <nav className="px-5 py-5">
