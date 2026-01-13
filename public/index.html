@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width" />
+   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+ </head>
+ <body>
+   <h1>DKB Scuba -supabase Auth</h1>
+
+    <input type="button" value="login" id="login" />
+
+
+   <script>
+     const supabaseUrl = 'https://vnlfdqznxtnuotytjrfk.supabase.co';
+     const supabaseKey = 'sb_publishable_Bq861pmuzAC4Tp70NgvE8Q_a-3Qt3lL';
+     const client = supabase.createClient(supabaseUrl, supabaseKey);
+
+
+     async function signInWithGithub() {
+       const { data, error } = await client.auth.signInWithOAuth({
+         provider: "github",
+         options: {
+           redirectTo: "https://supa-next-vercel-teal.vercel.app/index.html",
+         },
+       });
+     }
+     document
+       .querySelector("#login")
+       .addEventListener("click", signInWithGithub);
+   </script>
+
+<input type="button" value="logout" id="logout" />
+   <script>
+     async function checkLogin() {
+       const authInfo = await client.auth.getSession();
+       const session = authInfo.data.session;
+       document.querySelector("#login").style.display = "none";
+       document.querySelector("#logout").style.display = "none";
+       if (session === null) {
+         document.querySelector("#login").style.display = "inline";
+       } else {
+         document.querySelector("#logout").style.display = "inline";
+       }
+     }
+     checkLogin();
+   </script>
+
+<script>
+     async function signOut() {
+       const { error } = await client.auth.signOut();
+       checkLogin();
+     }
+     document.querySelector("#logout").addEventListener("click", signOut);
+   </script>
+
+
+<div id="history"></div>
+<script>
+     async function refreshHistory() {
+       let { data: record, error } = await client.from("page").select("*");
+       let tag = "";
+       for (let i = 0; i < record.length; i++) {
+         tag += `<div style="margin:20px 0">
+           <h2>${record[i].title}</h2>${record[i].body} <p>
+             <input type="button" value="delete" onclick="
+             deleteRecord(${record[i].id})
+             " />
+</p>
+         </div>
+         `;
+       }
+       document.querySelector("#history").innerHTML = tag;
+     }
+     refreshHistory();
+   </script>
+
+<input type="button" value="create" id="create_btn" />
+
+
+   <script>
+     async function recordHandler() {
+       const { data, error } = await client
+         .from("page")
+         .insert([{ title: prompt("title?"), body: prompt("body?") }]);
+       refreshHistory();
+     }
+     document
+       .querySelector("#create_btn")
+       .addEventListener("click", recordHandler);
+   </script>
+
+ <script>
+     async function deleteRecord(id) {
+       const { data, error } = await client.from("page").delete().eq("id", id);
+       refreshHistory();
+     }
+   </script>
+
+ </body>
+</html>
