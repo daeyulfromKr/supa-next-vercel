@@ -23,13 +23,8 @@ export default function CharacterList() {
     return (
         <div>
             {characters.map(character => (
-                <div key={character.id}>
-                    <h2>{character.name}</h2>
-                    <img src={character.thumbnail} alt={character.name} style={{width:'100px'}} />
-                    <h3>Action:</h3>
-                    <ul>
-                        {}
-                    </ul>
+                <div key={character.id}  className="div_item">
+                    {character.name}
                 </div>
             ))}    
         </div>

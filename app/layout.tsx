@@ -12,15 +12,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html>
       <body>
-        <div className='min-h-screen'>{children}</div>
-        <footer className='bg-black p-4 text-white'>
-          <ul className='flex justify-center items-center gap-5'>
-            <li>contact</li>
-            <li>terms</li>
-            <li>about</li>
-          </ul>
+        <main>
+          <div className="container">{children}</div>
+        </main>
+        <footer>
+          <div className="footer-content">
+              <a href="#contact">Contact</a>
+              <a href="#terms">Terms</a>
+              <a href="#about">About</a>
+          </div>
         </footer>
       </body>
     </html>
