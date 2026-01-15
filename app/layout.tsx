@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import AuthButton from "./components/auth-button";
 
 export const metadata: Metadata = {
   title: "DKB Scuba",
@@ -14,6 +15,7 @@ export default function RootLayout({
   return (
     <html>
       <body>
+        <AuthButton />
         <main>
           <div className="container">{children}</div>
         </main>

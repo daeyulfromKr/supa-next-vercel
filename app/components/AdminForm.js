@@ -1,12 +1,26 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from "react";
 import { supabase } from '../../lib/supabaseClient'
 
 export default function AdminForm() {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        supabase.auth.getUser().then(({ data }) => {
+        setUser(data.user);
+        });
+    }, []);
+
+
     const [newCharacter, setNewCharacter] = useState({ name: '', thumbnail: ''})
 
     async function handleSubmit(e) {
+        if (!user) {
+            alert("로그인 후 글을 작성할 수 있습니다.");
+            return;
+        }
+
         e.preventDefault()
         const { data, error } = await supabase
             .from('characters')
@@ -23,7 +37,7 @@ export default function AdminForm() {
 
     return (
         <form  onSubmit={handleSubmit}>
-            <div class="form-group">
+            <div>
                 <p>이름 : </p>
                 <input id="name" name="name"
                     value={newCharacter.name}
@@ -32,7 +46,7 @@ export default function AdminForm() {
                 />
             </div>
 
-            <div class="form-group">
+            <div>
                 <p>사진 : </p>
                 <input id="thumbnail" name="thumbnail"
                     value={newCharacter.thumbnail}
@@ -40,7 +54,7 @@ export default function AdminForm() {
                     placeholder="사진경로"
                 />
             </div>
-
+            <br/>
             <button type="submit">사용자등록</button>
         </form>
     )
