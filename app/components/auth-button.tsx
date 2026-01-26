@@ -22,15 +22,16 @@ export default function AuthButton() {
   };
 
   return userEmail ? (
-    <div className="flex items-center gap-2 text-sm">
-      <span className="text-gray-500">👤 {userEmail}</span>
-      <button onClick={handleLogout} className="text-red-500 underline">
+    <div className="flex gap-2 text-sm">
+      
+      <a onClick={handleLogout} className="text-red-500 underline">
         로그아웃
-      </button>
+      </a>
+      (<span className="text-gray-500">👤 {userEmail}</span>)
     </div>
   ) : (
-    <button onClick={handleLogin} className="text-blue-600 underline">
+    <a onClick={handleLogin} className="text-blue-600 underline">
       GitHub 로그인
-    </button>
+    </a>
   );
 }

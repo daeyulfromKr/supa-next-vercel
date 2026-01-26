@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import AuthButton from "./components/auth-button";
+import { NavLinks } from '@/app/ui/nav-links'
 
 export const metadata: Metadata = {
   title: "DKB Scuba",
@@ -15,7 +16,7 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <AuthButton />
+        <NavLinks />
         <main>
           <div className="container">{children}</div>
         </main>
